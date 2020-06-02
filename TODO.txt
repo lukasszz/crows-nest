@@ -1,0 +1,8 @@
+## Server params
+Move:
+check_expected_reports():agents_expected, expected_report_interval
+to server attributes
+
+
+## ORM
+Change filters id_ in queries to objects

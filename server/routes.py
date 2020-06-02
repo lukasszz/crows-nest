@@ -1,8 +1,8 @@
-
 import flask
 from flask import request
 from werkzeug.exceptions import abort
 
+from server.monitor import update_agent_status
 from server.models import Server, Report
 from server import app, db
 
@@ -23,13 +23,13 @@ def report():
 
     body = request.json
 
-    # ip = request.remote_addr
-    # print(ip)
-    # s = Server.query.filter(Server.ip == ip).first()
-    # a = Agent.query.get(1)
-    # id_server = s.id
-    r = Report(agent=body.get('agent',''), status=body.get('status',''), desc=body.get('desc',''))
+    ip = request.remote_addr
+    s = Server.query.filter(Server.ip == ip, Server.name == body.get('server_name', '')).first()
+    if s is None:
+        return
+    r = Report(agent=body.get('agent', ''), status=body.get('status', ''), desc=body.get('desc', ''), id_server=s.id)
     db.session.add(r)
+    update_agent_status(s, r.agent, r.status)
     db.session.commit()
 
     return "Report saved"

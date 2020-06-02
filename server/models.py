@@ -9,6 +9,8 @@ class Server(db.Model):
     name = db.Column(db.String(64), index=True, unique=True)
     ip = db.Column(db.String(64), index=True, unique=True)
 
+    def __repr__(self):
+        return f'<Server {self.ip} {self.name}>'
 
 # class Agent(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)

@@ -11,9 +11,9 @@ def df():
     else:
         status = 'OK'
 
-    status = 'OK'
+    status = 'Error'
     r = requests.post('http://127.0.0.1:5000/report',
-                      json={"agent": 'psql', "status": status, "desc": '/home ' + str(freeGiB) + ' GiB'})
+                      json={"server_name": 'rademenes', "agent": 'df', "status": status, "desc": '/home ' + str(freeGiB) + ' GiB'})
     print(r.status_code)
 
 
