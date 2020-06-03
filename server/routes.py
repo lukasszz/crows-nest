@@ -13,7 +13,9 @@ def index():
     # s = Server(name='localhost', ip='127.0.0.1')
     # db.session.add(s)
     # db.session.commit()
-    return render_template('index.html')
+    servers = Server.query.all()
+
+    return render_template('index.html', servers=servers)
 
 
 @app.route('/report', methods=['POST'])
