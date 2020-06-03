@@ -1,5 +1,5 @@
 import flask
-from flask import request
+from flask import request, render_template
 from werkzeug.exceptions import abort
 
 from server.monitor import update_agent_status
@@ -13,7 +13,7 @@ def index():
     # s = Server(name='localhost', ip='127.0.0.1')
     # db.session.add(s)
     # db.session.commit()
-    return "Hello, World!"
+    return render_template('index.html')
 
 
 @app.route('/report', methods=['POST'])
