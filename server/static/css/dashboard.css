@@ -91,3 +91,33 @@ body {
 
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+/* CUSTOM */
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.status_OK {
+  height: 13px;
+  width: 13px;
+  background-color: #15f629;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status_WARNING {
+  height: 13px;
+  width: 13px;
+  background-color: darkorange;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status_ERROR {
+  height: 13px;
+  width: 13px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}

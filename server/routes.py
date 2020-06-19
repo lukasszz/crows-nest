@@ -3,7 +3,7 @@ from flask import request, render_template
 from werkzeug.exceptions import abort
 
 from server.monitor import update_agent_status
-from server.models import Server, Report
+from server.models import Server, Report, Status
 from server import app, db
 
 
@@ -14,8 +14,16 @@ def index():
     # db.session.add(s)
     # db.session.commit()
     servers = Server.query.all()
+    ret = []
+    for x in servers:
+        temp = {}
+        temp['ip'] = x.ip
+        temp['name'] = x.name
+        status_ = [y for y in Status.query.filter_by(id_server=x.id).all()]
+        temp['agents'] = [{'agent': c.agent, 'status': c.status} for c in status_]
+        ret.append(temp)
 
-    return render_template('index.html', servers=servers)
+    return render_template('index.html', servers=ret)
 
 
 @app.route('/report', methods=['POST'])

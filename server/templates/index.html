@@ -16,12 +16,33 @@
         <div class="col-lg-3">
           <div class="card">
 
-            <div class="card-body">
-              Testowe okno
+            <div class="card-header text-muted">
+               <i class="fa fa-server" aria-hidden="true"></i> {{ serv.name }} ({{ serv.ip }})
             </div>
 
-            <div class="card-footer text-muted">
-                {{ serv.name }} ({{ serv.ip }})
+            <div class="card-body">
+              <table class="table borderless">
+                <tbody>
+                  {% for a in serv.agents %}
+                  <tr>
+                    <td style="padding: 5px;">
+                    {% if a.agent == "PostgreSQL" %}
+                      <span class="status_{{a.status}}"></span> <i class="fa fa-database" aria-hidden="true"></i> {{ a.agent }}
+                      {% continue %}
+                    {% endif %}
+                    {% if a.agent == "Discspace" %}
+                      <span class="status_{{a.status}}"></span> <i class="fa fa-hdd-o" aria-hidden="true"></i> {{ a.agent }}
+                      {% continue %}
+                    {% endif %}
+                    {% if a.agent == "Apache2" %}
+                      <span class="status_{{a.status}}"></span> <i class="fa fa-cubes" aria-hidden="true"></i> {{ a.agent }}
+                      {% continue %}
+                    {% endif %}
+                    <span class="status_{{a.status}}"></span> {{ a.agent }}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
