@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Dashboard</h1>
+
+      <!--<div class="btn-toolbar mb-2 mb-md-0">
+         Tutaj można dawać przyciski
+      </div>-->
+    </div>
+
+    <div class="row">
+    {% for serv in servers %}
+        <div class="col-lg-3">
+          <div class="card">
+
+            <div class="card-header text-muted">
+               <i class="fa fa-server" aria-hidden="true"></i> {{ serv.name }} ({{ serv.ip }})
+            </div>
+
+            <div class="card-body">
+              <table class="table borderless">
+                <tbody>
+                  {% for a in serv.agents %}
+                  <tr>
+                    <td style="padding: 5px;">
+                    {% if a.agent == "PostgreSQL" %}
+                      <span class="status_{{a.status}}"></span> <i class="fa fa-database" aria-hidden="true"></i> {{ a.agent }}
+                      {% continue %}
+                    {% endif %}
+                    {% if a.agent == "Discspace" %}
+                      <span class="status_{{a.status}}"></span> <i class="fa fa-hdd-o" aria-hidden="true"></i> {{ a.agent }}
+                      {% continue %}
+                    {% endif %}
+                    {% if a.agent == "Apache2" %}
+                      <span class="status_{{a.status}}"></span> <i class="fa fa-cubes" aria-hidden="true"></i> {{ a.agent }}
+                      {% continue %}
+                    {% endif %}
+                    <span class="status_{{a.status}}"></span> {{ a.agent }}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+
+  </main>
+
+{% endblock %}
+
